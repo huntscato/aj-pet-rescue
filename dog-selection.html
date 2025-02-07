@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>AJ's Pet Rescue</title>
+  <title>Meet the Pups! - AJ's Pet Rescue</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -36,17 +36,32 @@
     </div>
   </section>
 
+  <section id="search">
+    <h2>Search for your new best bud!</h2>
+    <label for="breed">Filter by Breed</label>
+    <select id="breed">
+      <option value="">All Breeds</option>
+    </select>
+    <button id="search-btn">Search</button>
+  </section>
+
+  <section id="results">
+    <h2>Available Doggos</h2>
+    <div id="dog-list"></div>
+  </section>
+
   <!-- Add your site or application content here -->
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
+  
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
-  </script>
+    </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
+  <script src="js/main.js"></script>
+  <script src="js/dog-selection.js"></script>
 </body>
 
 </html>

@@ -119,6 +119,15 @@ textarea {
     font-style: italic;;
   }
 
+/**** DOG SELECTION ****/
+
+.dog-card {
+  border: 3px solid black;
+}
+
+#dog-list img {
+  width: 20%;
+}
 
 
 
