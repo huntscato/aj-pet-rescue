@@ -101,11 +101,12 @@ const displayDogs = (dogs) => {
     });
 };
 
-const favoriteDogs = [];
+const favoriteDogs = JSON.parse(localStorage.getItem('favoriteDogs')) || [];
 
 const favoriteDog = (id) => {
     if (!favoriteDogs.includes(id)) {
         favoriteDogs.push(id);
+        localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogs));
         console.log(`Dog with ID ${id} added to favorites`);
     }
 };
