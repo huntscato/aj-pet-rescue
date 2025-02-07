@@ -28,7 +28,7 @@ const populateBreedFilter = async () => {
     }
 };
 
-const fetchAndDisplayDogs = async (breed = '', page = 1, size = resultsPerPage) => {
+const fetchAndDisplayDogs = async (breed = '', page = 1, size = resultsPerPage, sortField = 'name', sortOrder = 'asc') => {
     const dogList = document.getElementById('dog-list');
     dogList.innerHTML = 'Loading...';
 
@@ -36,7 +36,7 @@ const fetchAndDisplayDogs = async (breed = '', page = 1, size = resultsPerPage) 
         breeds: breed,
         size,
         from: (page - 1) * size,
-        sort: 'breed:asc'
+        sort: 'name:asc'
     });
 
     try {
