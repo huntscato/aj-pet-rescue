@@ -1,3 +1,6 @@
+let currentPage = 1;
+const resultsPerPage = 7;
+
 document.addEventListener('DOMContentLoaded', async () => {
     await populateBreedFilter();
     await fetchAndDisplayDogs();
@@ -25,7 +28,7 @@ const populateBreedFilter = async () => {
     }
 };
 
-const fetchAndDisplayDogs = async (breed = '', page = 1, size = 25) => {
+const fetchAndDisplayDogs = async (breed = '', page = 1, size = resultsPerPage) => {
     const dogList = document.getElementById('dog-list');
     dogList.innerHTML = 'Loading...';
 
@@ -42,7 +45,9 @@ const fetchAndDisplayDogs = async (breed = '', page = 1, size = 25) => {
         });
         if (response.ok) {
             const data = await response.json();
-            displayDogs(data.resultIds);
+            const dogDetails = await fetchDogDetails(data.resultIds); // Fetch dog details for each result
+            displayDogs(dogDetails);
+            updatePaginationControls(data.total);
         } else {
             console.error('Failed to fetch dogs');
             dogList.innerHTML = 'Failed to load dogs.';
@@ -53,10 +58,7 @@ const fetchAndDisplayDogs = async (breed = '', page = 1, size = 25) => {
     }
 };
 
-const displayDogs = async (dogIds) => {
-    const dogList = document.getElementById('dog-list');
-    dogList.innerHTML = '';
-
+const fetchDogDetails = async (dogIds) => {
     try {
         const response = await fetch('https://frontend-take-home-service.fetch.com/dogs', {
             method: 'POST',
@@ -69,27 +71,34 @@ const displayDogs = async (dogIds) => {
 
         if (response.ok) {
             const dogs = await response.json();
-            dogs.forEach(dog => {
-                const dogCard = document.createElement('div');
-                dogCard.classList.add('dog-card');
-                dogCard.innerHTML = `
-                    <img src="${dog.img}" alt="${dog.name}">
-                    <h3>${dog.name}</h3>
-                    <p>Breed: ${dog.breed}</p>
-                    <p>Age: ${dog.age}</p>
-                    <p>Location: ${dog.zip_code}</p>
-                    <button onclick="favoriteDog('${dog.id}')">Add to Favorites</button>
-                `;
-                dogList.appendChild(dogCard);
-            });
+            return dogs;
         } else {
             console.error('Failed to fetch dog details');
-            dogList.innerHTML = 'Failed to load dog details.';
+            return [];
         }
     } catch (error) {
         console.error('Error fetching dog details:', error);
-        dogList.innerHTML = 'Error loading dog details.';
+        return [];
     }
+};
+
+const displayDogs = (dogs) => {
+    const dogList = document.getElementById('dog-list');
+    dogList.innerHTML = '';
+
+    dogs.forEach(dog => {
+        const dogCard = document.createElement('div');
+        dogCard.classList.add('dog-card');
+        dogCard.innerHTML = `
+            <img src="${dog.img}" alt="${dog.name}">
+            <h3>${dog.name}</h3>
+            <p>Breed: ${dog.breed}</p>
+            <p>Age: ${dog.age}</p>
+            <p>Location: ${dog.zip_code}</p>
+            <button onclick="favoriteDog('${dog.id}')">Add to Favorites</button>
+        `;
+        dogList.appendChild(dogCard);
+    });
 };
 
 const favoriteDogs = [];
@@ -147,19 +156,27 @@ const displayMatch = async (matchId) => {
     }
 };
 
+const updatePaginationControls = (totalResults) => {
+    const totalPages = Math.ceil(totalResults / resultsPerPage);
+
+    const prevButton = document.getElementById('prev-page');
+    const nextButton = document.getElementById('next-page');
+
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
+
+    prevButton.addEventListener('click', () => changePage(currentPage - 1));
+    nextButton.addEventListener('click', () => changePage(currentPage + 1));
+};
+
+const changePage = async (page) => {
+    if (page >= 1) {
+        currentPage = page;
+        await fetchAndDisplayDogs(document.getElementById('breed').value, currentPage, resultsPerPage);
+    }
+};
+
 document.getElementById('search-btn').addEventListener('click', async () => {
     const breed = document.getElementById('breed').value;
     await fetchAndDisplayDogs(breed);
-});
-
-document.getElementById('next-page').addEventListener('click', () => {
-    currentPage++;
-    fetchAndDisplayDogs(document.getElementById('breed').value, currentPage);
-});
-
-document.getElementById('prev-page').addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        fetchAndDisplayDogs(document.getElementById('breed').value, currentPage);
-    }
 });
