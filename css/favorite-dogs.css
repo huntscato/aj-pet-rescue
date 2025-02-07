@@ -122,6 +122,21 @@ textarea {
     font-style: italic;;
   }
 
+  /**** DOG CARDS ****/
+
+  .dog-card {
+    border: 3px solid black;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .dog-card img {
+    border: 4px solid #a5c2a5;
+    width: 40%;
+  }
+
 
 /* ==========================================================================
    Helper classes
