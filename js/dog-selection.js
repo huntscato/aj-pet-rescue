@@ -101,14 +101,21 @@ const displayDogs = (dogs) => {
     });
 };
 
+// Favorite dogs list management
 const favoriteDogs = JSON.parse(localStorage.getItem('favoriteDogs')) || [];
 
 const favoriteDog = (id) => {
-    if (!favoriteDogs.includes(id)) {
+    const index = favoriteDogs.indexOf(id);
+
+    if (index === -1) {
         favoriteDogs.push(id);
-        localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogs));
         console.log(`Dog with ID ${id} added to favorites`);
+    } else {
+        favoriteDogs.splice(index, 1);
+        console.log(`Dog with ID ${id} removed from favorites`);
     }
+
+    localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogs));
 };
 
 const generateMatch = async () => {

@@ -25,12 +25,18 @@ const loadFavoriteDogs = async () => {
             console.error('Error fetching favorite dogs:', error);
         }
     } else {
-        document.getElementById('favorite-dog-list').innerHTML = 'No favorite dogs found.';
+        document.getElementById('favorite-dogs-list').innerHTML = 'No favorite dogs found.';
     }
 };
 
 const displayFavoriteDogs = (dogs) => {
-    const favoriteDogList = document.getElementById('favorite-dog-list');
+    const favoriteDogList = document.getElementById('favorite-dogs-list');
+
+    if (!favoriteDogList) {
+        console.error('Favorite dog list element not found');
+        return;
+    }
+
     favoriteDogList.innerHTML = '';
 
     dogs.forEach(dog => {
@@ -42,7 +48,19 @@ const displayFavoriteDogs = (dogs) => {
             <p>Breed: ${dog.breed}</p>
             <p>Age: ${dog.age}</p>
             <p>Location: ${dog.zip_code}</p>
+            <button onclick="removeFavoriteDog('${dog.id}')">Remove from Favorites</button>
         `;
         favoriteDogList.appendChild(dogCard);
     });
+};
+
+const removeFavoriteDog = (id) => {
+    const favoriteDogs = JSON.parse(localStorage.getItem('favoriteDogs')) || [];
+    const index = favoriteDogs.indexOf(id);
+
+    if (index !== -1) {
+        favoriteDogs.splice(index, 1);
+        localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogs));
+        loadFavoriteDogs();  // Reload the list to reflect changes
+    }
 };
