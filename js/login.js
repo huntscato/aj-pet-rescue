@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 console.log('Login Successful!');
-                window.location.href = '/search.html'; // Redirect to search page
+                window.location.href = 'dog-selection.html'; // Redirect to search page
             } else {
                 alert('Login failed. Please check your credentials.');
             }

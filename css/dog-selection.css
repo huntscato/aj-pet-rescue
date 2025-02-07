@@ -90,6 +90,10 @@ textarea {
   
    /**** HEADER ****/
 
+  h2 {
+    text-align: center;
+  }
+
   #header {
     background-color: #C5D7D1;
     border: 1px solid #98b4ab;
@@ -123,10 +127,18 @@ textarea {
 
 .dog-card {
   border: 3px solid black;
+  margin: 10px 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.dog-card h3 {
+  text-decoration: underline;
 }
 
 #dog-list img {
-  width: 20%;
+  border: 4px solid #a5c2a5;
+  width: 40%;
 }
 
 
