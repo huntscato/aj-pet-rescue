@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadFavoriteDogs();
+    await loadFavoriteDogs();   
+    const generateMatchBtn = document.getElementById('generate-match-btn');
+    if (generateMatchBtn) {
+        generateMatchBtn.addEventListener('click', generateMatch);
+    } else {
+        console.error('Generate match button not found');
+    }
 });
 
 const loadFavoriteDogs = async () => {
@@ -18,6 +24,7 @@ const loadFavoriteDogs = async () => {
             if (response.ok) {
                 const dogs = await response.json();
                 displayFavoriteDogs(dogs);
+                document.getElementById('generate-match-btn').addEventListener('click', () => generateMatch(dogs));
             } else {
                 console.error('Failed to fetch favorite dogs');
             }
@@ -62,5 +69,66 @@ const removeFavoriteDog = (id) => {
         favoriteDogs.splice(index, 1);
         localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogs));
         loadFavoriteDogs();  // Reload the list to reflect changes
+    }
+};
+
+const generateMatch = async () => {
+    const favoriteDogs = JSON.parse(localStorage.getItem('favoriteDogs')) || [];
+    if (favoriteDogs.length < 3) {
+        alert('Please favorite at least 3 dogs to generate a match.');
+        return;
+    }
+
+    try {
+        const response = await fetch('https://frontend-take-home-service.fetch.com/dogs/match', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(favoriteDogs),
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            const match = await response.json();
+            displayMatchedDog(match.match);
+        } else {
+            console.error('Failed to generate match');
+        }
+    } catch (error) {
+        console.error('Error generating match:', error);
+    }
+};
+
+const displayMatchedDog = async (matchId) => {
+    try {
+        const response = await fetch('https://frontend-take-home-service.fetch.com/dogs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify([matchId]),
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            const [matchedDog] = await response.json();
+            const favoritesSection = document.getElementById('favorites');
+            favoritesSection.innerHTML = `
+                <h2>Your Perfect Match!</h2>
+                <div class="dog-card">
+                    <img src="${matchedDog.img}" alt="${matchedDog.name}">
+                    <h3>${matchedDog.name}</h3>
+                    <p>Breed: ${matchedDog.breed}</p>
+                    <p>Age: ${matchedDog.age}</p>
+                    <p>Location: ${matchedDog.zip_code}</p>
+                    <p>Call us to learn more about your potential new pal!</p>
+                </div>
+            `;
+        } else {
+            console.error('Failed to fetch matched dog');
+        }
+    } catch (error) {
+        console.error('Error fetching matched dog:', error);
     }
 };
