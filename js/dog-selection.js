@@ -88,14 +88,18 @@ const displayDogs = (dogs) => {
 
     dogs.forEach(dog => {
         const dogCard = document.createElement('div');
-        dogCard.classList.add('dog-card');
+        dogCard.classList.add('dog-card')
+
+        const isFavorited = favoriteDogs.includes(dog.id);
+        const buttonText = isFavorited ? "Added to Favorites" : "Add to Favorites";
+
         dogCard.innerHTML = `
             <img src="${dog.img}" alt="${dog.name}">
             <h3>${dog.name}</h3>
             <p>Breed: ${dog.breed}</p>
             <p>Age: ${dog.age}</p>
             <p>Location: ${dog.zip_code}</p>
-            <button onclick="favoriteDog('${dog.id}')">Add to Favorites</button>
+            <button id="fav-btn-${dog.id}" onclick="favoriteDog('${dog.id}')">Add to Favorites</button>
         `;
         dogList.appendChild(dogCard);
     });
@@ -106,9 +110,11 @@ const favoriteDogs = JSON.parse(localStorage.getItem('favoriteDogs')) || [];
 
 const favoriteDog = (id) => {
     const index = favoriteDogs.indexOf(id);
+    const button = document.getElementById(`fav-btn-${id}`);
 
     if (index === -1) {
         favoriteDogs.push(id);
+        button.textContent = "Added to Favorites!";
         console.log(`Dog with ID ${id} added to favorites`);
     } else {
         favoriteDogs.splice(index, 1);
