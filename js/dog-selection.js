@@ -194,3 +194,24 @@ document.getElementById('search-btn').addEventListener('click', async () => {
     const breed = document.getElementById('breed').value;
     await fetchAndDisplayDogs(breed);
 });
+
+const isElementInView = (element) => {
+    const rect = element.getBoundingClientRect();
+    return rect.top <= window.innerHeight && rect.bottom >= 0;
+};
+
+// Function to trigger the fade and slide animation
+const animateOnScroll = () => {
+    const dogCards = document.querySelectorAll('.dog-card');
+    dogCards.forEach(card => {
+        if (isElementInView(card)) {
+            card.classList.add('visible');
+        }
+    });
+};
+
+// Event listener for scroll event
+window.addEventListener('scroll', animateOnScroll);
+
+// Initial check in case dog cards are already in view on page load
+animateOnScroll();
