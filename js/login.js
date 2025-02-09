@@ -3,8 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.querySelector('#name');
     const emailInput = document.querySelector('#email');  
 
-    if (!loginForm) return; // Exit if the login form is not found on the page
-
+    if (!loginForm) return;
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 console.log('Login Successful!');
-                window.location.href = 'dog-selection.html'; // Redirect to search page
+                window.location.href = 'dog-selection.html';
             } else {
                 alert('Login failed. Please check your credentials.');
             }

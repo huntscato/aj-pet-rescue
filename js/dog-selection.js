@@ -45,7 +45,7 @@ const fetchAndDisplayDogs = async (breed = '', page = 1, size = resultsPerPage, 
         });
         if (response.ok) {
             const data = await response.json();
-            const dogDetails = await fetchDogDetails(data.resultIds); // Fetch dog details for each result
+            const dogDetails = await fetchDogDetails(data.resultIds);
             displayDogs(dogDetails);
             updatePaginationControls(data.total);
         } else {
@@ -160,8 +160,6 @@ const displayMatch = async (matchId) => {
         if (response.ok) {
             const matchedDog = await response.json();
             console.log('Matched Dog:', matchedDog);
-            // Display the matched dog details
-            // Add your display code here
         } else {
             console.error('Failed to fetch matched dog details');
         }

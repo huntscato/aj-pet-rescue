@@ -273,7 +273,7 @@ textarea {
   body {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the whole body content */
+    align-items: center;
     justify-content: flex-start;
     margin: 0;
     padding: 0;
@@ -281,9 +281,9 @@ textarea {
   }
   
   #results {
-    width: 80%; /* Adjust to control the width of the results section */
-    max-width: 1200px; /* Optional: limit the width on larger screens */
-    margin: 20px auto; /* Centers the section with some top/bottom space */
+    width: 80%;
+    max-width: 1200px; 
+    margin: 20px auto;
     text-align: center;
   }
 

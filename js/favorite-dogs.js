@@ -68,7 +68,7 @@ const removeFavoriteDog = (id) => {
     if (index !== -1) {
         favoriteDogs.splice(index, 1);
         localStorage.setItem('favoriteDogs', JSON.stringify(favoriteDogs));
-        loadFavoriteDogs();  // Reload the list to reflect changes
+        loadFavoriteDogs();  
     }
 };
 
