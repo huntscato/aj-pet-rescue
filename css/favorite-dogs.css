@@ -89,6 +89,12 @@ textarea {
 
       /**** HEADER ****/
 
+  #aj-picture {
+     border: 3px solid #295463;
+    border-radius: 50%;
+    width: 35%;
+  }
+
   h2 {
     text-align: center;
   }
@@ -100,16 +106,14 @@ textarea {
     padding: 20px;
   }
 
+  #header a {
+    padding: 0 5px;
+  }
+
   .header-block {
     align-items: center;
     display: flex;
     text-align: left;
-  }
-
-  #header img {
-    border: 3px solid #295463;
-    border-radius: 50%;
-    width: 35%;
   }
 
   .header-text {
@@ -118,8 +122,20 @@ textarea {
     text-align: center;
   }
 
+  .header-text a {
+    color: #295463;
+  }
+
   #header h4 {
     font-style: italic;;
+  }
+
+  #logo {
+    background-color: #2b4f5c;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    width: 85%;
   }
 
   /**** DOG CARDS ****/
@@ -136,6 +152,57 @@ textarea {
     border: 4px solid #a5c2a5;
     width: 40%;
   }
+
+
+/**** TABLET STYLING ****/ 
+
+/**** HEADER ****/ 
+
+#aj-picture {
+  width: 25%;
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.header-block {
+  padding-left: 15%;
+}
+
+.header-text {
+  width: 30%;
+}
+
+#logo {
+  width: 50%;
+}
+
+
+/**** FAVORITE DOG SECTION ****/
+
+.dog-card {
+  width: 90%;
+}
+
+#favorite-dog-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 20px; 
+  width: 100%;
+}
+
+#favorites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 
 
 /* ==========================================================================

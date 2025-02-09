@@ -93,6 +93,12 @@ textarea {
 
   /**** HEADER ****/
 
+  #aj-picture {
+    border: 3px solid #295463;
+    border-radius: 50%;
+    width: 35%;
+ }
+
   #header {
     background-color: #C5D7D1;
     border: 1px solid #98b4ab;
@@ -106,20 +112,27 @@ textarea {
     text-align: left;
   }
 
-  #header img {
-    border: 3px solid #295463;
-    border-radius: 50%;
-    width: 35%;
-  }
-
   .header-text {
     flex: 1;
     padding-left: 20px;
     text-align: center;
   }
 
+  .header-text a {
+    color: #295463;
+    padding: 4px;
+  }
+
   #header h4 {
     font-style: italic;;
+  }
+
+  #logo {
+    background-color: #2b4f5c;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    width: 85%;
   }
 
   /**** LOGIN FORM ****/
@@ -163,6 +176,42 @@ textarea {
     margin-bottom: 5px;
     text-decoration: underline;
   }
+
+
+/**** TABLET STYLING ****/
+
+
+/**** HEADER ****/ 
+
+#aj-picture {
+  width: 25%;
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.header-block {
+  padding-left: 15%;
+}
+
+.header-text {
+  width: 30%;
+}
+
+#logo {
+  width: 50%;
+}
+
+/**** LOGIN FORM ****/
+
+#login-form {
+  margin-top: 20px;
+}
 
 
 /* ==========================================================================
