@@ -172,52 +172,113 @@ textarea {
 
 /**** TABLET STYLING ****/
 
+@media (min-width: 768px) {
 
-/**** HEADER ****/ 
 
-#aj-picture {
-  width: 25%;
+  /**** HEADER ****/ 
+
+  #aj-picture {
+    width: 25%;
+  }
+
+  #header {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-block {
+    padding-left: 15%;
+  }
+
+  .header-text {
+    width: 30%;
+  }
+
+  #logo {
+    width: 50%;
+  }
+
+  /**** DOG SELECTION ****/
+
+  .dog-card {
+    width: 50%;
+  }
+
+  #dog-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px; 
+    width: 100%;
+  }
+
+  #results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
 }
 
-#header {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
-}
 
-.header-block {
-  padding-left: 15%;
-}
+/**** DESKTOP STYLING ****/
 
-.header-text {
-  width: 30%;
-}
+@media (min-width: 1200px) {
 
-#logo {
-  width: 50%;
-}
+  /**** HEADER SECTION ****/
 
-/**** DOG SELECTION ****/
+  #aj-picture {
+    border: 5px solid #295463;
+  }
 
-.dog-card {
-  width: 50%;
-}
+  #header a {
+    font-size: 1.5em;
+    padding: 40px;
+  }
 
-#dog-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; 
-  gap: 20px; 
-  width: 100%;
-}
+  .header-block {
+    width: 70%;
+  }
 
-#results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  #logo {
+    margin-bottom: 20px;
+  }
+
+  /**** DOG SELECTION SECTION ****/
+
+  .dog-card {
+    width: 70%;
+  }
+
+  #dog-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    justify-content: center;
+    margin-left: 60px;
+    width: 100%; 
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the whole body content */
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  #results {
+    width: 80%; /* Adjust to control the width of the results section */
+    max-width: 1200px; /* Optional: limit the width on larger screens */
+    margin: 20px auto; /* Centers the section with some top/bottom space */
+    text-align: center;
+  }
+
 }
 
 

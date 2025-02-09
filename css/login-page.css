@@ -180,37 +180,40 @@ textarea {
 
 /**** TABLET STYLING ****/
 
+@media (min-width: 768px) {
 
-/**** HEADER ****/ 
+  /**** HEADER ****/ 
 
-#aj-picture {
-  width: 25%;
-}
+  #aj-picture {
+    width: 25%;
+  }
 
-#header {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
-}
+  #header {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
 
-.header-block {
-  padding-left: 15%;
-}
+  .header-block {
+    padding-left: 15%;
+  }
 
-.header-text {
-  width: 30%;
-}
+  .header-text {
+    width: 30%;
+  }
 
-#logo {
-  width: 50%;
-}
+  #logo {
+    width: 50%;
+  }
 
-/**** LOGIN FORM ****/
+  /**** LOGIN FORM ****/
 
-#login-form {
-  margin-top: 20px;
+  #login-form {
+    margin-top: 20px;
+  }
+
 }
 
 

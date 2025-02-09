@@ -1,5 +1,5 @@
 let currentPage = 1;
-const resultsPerPage = 7;
+const resultsPerPage = 8;
 
 document.addEventListener('DOMContentLoaded', async () => {
     await populateBreedFilter();
