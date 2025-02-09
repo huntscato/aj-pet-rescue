@@ -14,6 +14,19 @@ const populateBreedFilter = async () => {
         });
         if (response.ok) {
             const breeds = await response.json();
+            
+            // Add the sorting options to the beginning of the breed dropdown
+            const sortOptionAZ = document.createElement('option');
+            sortOptionAZ.value = 'sort-asc';
+            sortOptionAZ.textContent = 'Sort A-Z';
+            breedSelect.appendChild(sortOptionAZ);
+
+            const sortOptionZA = document.createElement('option');
+            sortOptionZA.value = 'sort-desc';
+            sortOptionZA.textContent = 'Sort Z-A';
+            breedSelect.appendChild(sortOptionZA);
+            
+            // Populate the breed list
             breeds.forEach(breed => {
                 const option = document.createElement('option');
                 option.value = breed;
@@ -26,6 +39,51 @@ const populateBreedFilter = async () => {
     } catch (error) {
         console.error('Error fetching breeds:', error);
     }
+};
+
+// Handle sort change
+document.getElementById('breed').addEventListener('change', async () => {
+    const breedSelect = document.getElementById('breed');
+    const selectedValue = breedSelect.value;
+
+    if (selectedValue === 'sort-asc') {
+        await sortBreeds('asc');
+    } else if (selectedValue === 'sort-desc') {
+        await sortBreeds('desc');
+    } else {
+        // Fetch and display dogs for the selected breed
+        await fetchAndDisplayDogs(selectedValue);
+    }
+});
+
+const sortBreeds = async (order) => {
+    const breedSelect = document.getElementById('breed');
+    const breedOptions = Array.from(breedSelect.options).slice(2); // Skip the first two options (All Breeds, Sort options)
+
+    const sortedBreeds = breedOptions.sort((a, b) => {
+        if (order === 'asc') {
+            return a.text.localeCompare(b.text);
+        } else {
+            return b.text.localeCompare(a.text);
+        }
+    });
+
+    // Clear the breed dropdown options except the sort options
+    breedSelect.innerHTML = '';
+    
+    // Add the sort options back at the beginning
+    const sortOptionAZ = document.createElement('option');
+    sortOptionAZ.value = 'sort-asc';
+    sortOptionAZ.textContent = 'Sort A-Z';
+    breedSelect.appendChild(sortOptionAZ);
+
+    const sortOptionZA = document.createElement('option');
+    sortOptionZA.value = 'sort-desc';
+    sortOptionZA.textContent = 'Sort Z-A';
+    breedSelect.appendChild(sortOptionZA);
+
+    // Add sorted breed options back
+    sortedBreeds.forEach(option => breedSelect.appendChild(option));
 };
 
 const fetchAndDisplayDogs = async (breed = '', page = 1, size = resultsPerPage, sortField = 'name', sortOrder = 'asc') => {
