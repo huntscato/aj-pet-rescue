@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.querySelector('#name');
     const emailInput = document.querySelector('#email');  
 
+    alert("Hunter here! Input any valid email and anything for a password and you'll be in!")
+
     if (!loginForm) return;
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
