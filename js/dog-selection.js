@@ -4,6 +4,7 @@ const resultsPerPage = 8;
 document.addEventListener('DOMContentLoaded', async () => {
     await populateBreedFilter();
     await fetchAndDisplayDogs();
+    ensureFirstTwoCardsVisible(); // Ensure the first two dog cards are visible on load
 });
 
 const populateBreedFilter = async () => {
@@ -146,7 +147,7 @@ const displayDogs = (dogs) => {
 
     dogs.forEach(dog => {
         const dogCard = document.createElement('div');
-        dogCard.classList.add('dog-card')
+        dogCard.classList.add('dog-card');
 
         const isFavorited = favoriteDogs.includes(dog.id);
         const buttonText = isFavorited ? "Added to Favorites" : "Add to Favorites";
@@ -161,6 +162,9 @@ const displayDogs = (dogs) => {
         `;
         dogList.appendChild(dogCard);
     });
+
+    // Trigger animation for dog cards
+    animateOnScroll();
 };
 
 // Favorite dogs list management
@@ -251,12 +255,23 @@ document.getElementById('search-btn').addEventListener('click', async () => {
     await fetchAndDisplayDogs(breed);
 });
 
+// Function to ensure the first two dog cards are visible on page load
+const ensureFirstTwoCardsVisible = () => {
+    const dogCards = document.querySelectorAll('.dog-card');
+    dogCards.forEach((card, index) => {
+        // Make the first two cards visible immediately
+        if (index < 2) {
+            card.classList.add('visible');
+        }
+    });
+};
+
 const isElementInView = (element) => {
     const rect = element.getBoundingClientRect();
     return rect.top <= window.innerHeight && rect.bottom >= 0;
 };
 
-// Function to trigger the fade and slide animation
+// Function to trigger the fade and slide animation as user scrolls
 const animateOnScroll = () => {
     const dogCards = document.querySelectorAll('.dog-card');
     dogCards.forEach(card => {
